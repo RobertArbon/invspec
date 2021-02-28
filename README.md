@@ -7,6 +7,18 @@ invspec
 
 Generates stochastic matrices with given properties
 
+```{python}
+>>> import invspec
+>>> import numpy as np
+>>> 
+>>> eigenvalues = np.array([0.9, 0.8, 0.4, 0.2])
+>>> matrix = invspec.stochastic_matrix(eigenvalues)
+>>> 
+>>> evals, evecs = np.linalg.eig(matrix)
+>>> evals
+[1, 0.9, 0.8, 0.4, 0.2]
+```
+
 ### Copyright
 
 Copyright (c) 2021, rob arbon
