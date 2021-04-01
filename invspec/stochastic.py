@@ -8,8 +8,9 @@ Handles the primary functions
 """
 
 
-def stochastic_matrix(eigenvalues):
-
+def stochastic_matrix(eigenvalues, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
     eigenvalues = get_valid_spectrum(eigenvalues)
     matrix = build_matrix(eigenvalues)
     rmsd = eigenvalues_rmsd(eigenvalues, matrix)
