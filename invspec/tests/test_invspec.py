@@ -16,7 +16,7 @@ def test_invspec_imported():
 
 def test_eigenvalues():
     eigenvalues = np.array([0.9, 0.8])
-    mat = invspec.stochastic_matrix(eigenvalues)
+    mat = next(invspec.stochastic_matrix(eigenvalues, num_matrices=1, seed=123))
     eigenvalues = np.concatenate([[1], eigenvalues])
 
     evs, _ = np.linalg.eig(mat)
@@ -32,7 +32,7 @@ def is_stochastic(matrix):
 
 def test_is_stochastic():
     eigenvalues = np.array([0.9, 0.8])
-    mat = invspec.stochastic_matrix(eigenvalues)
+    mat = next(invspec.stochastic_matrix(eigenvalues, num_matrices=1, seed=123))
     assert is_stochastic(mat)
 
 

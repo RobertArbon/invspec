@@ -8,16 +8,17 @@ Handles the primary functions
 """
 
 
-def stochastic_matrix(eigenvalues, seed=None):
+def stochastic_matrix(eigenvalues, num_matrices, seed=None):
     if seed is not None:
         np.random.seed(seed)
-    eigenvalues = get_valid_spectrum(eigenvalues)
-    matrix = build_matrix(eigenvalues)
-    rmsd = eigenvalues_rmsd(eigenvalues, matrix)
-    if rmsd > TOL:
-        raise RuntimeError(f'Something has gone wrong! RMSD between requested and actual eigenvalues is {rmsd:4.2f}.')
-    else:
-        return matrix
+    for i in range(num_matrices):
+        eigenvalues = get_valid_spectrum(eigenvalues)
+        matrix = build_matrix(eigenvalues)
+        rmsd = eigenvalues_rmsd(eigenvalues, matrix)
+        if rmsd > TOL:
+            raise RuntimeError(f'Something has gone wrong! RMSD between requested and actual eigenvalues is {rmsd:4.2f}.')
+        else:
+            yield matrix
 
 
 def eigenvalues_rmsd(eigenvalues, matrix):
